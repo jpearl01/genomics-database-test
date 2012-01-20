@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<!--
+    # Title: hs_records_table<BR>
+    # Author: Joshua Earl<BR>
+    # Date: January 2012 <BR>
+    # Descripition: hs_records_table for genomics database<BR>
+-->
+<?php
+session_start();
+ob_start();
+// if session variable not set, redirect to login page
+if (!isset($_SESSION['authenticated'])) {
+  header('Location: http://10.255.6.123/genomics/login.php');
+  exit;
+}
+require_once('/var/www/html/genomics/includes/session_timeout.inc.php');
+
+include '/var/www/html/genomics/includes/HS_filter.inc.php';
+include '/var/www/html/genomics/includes/createLink.inc.php';
+require_once '/var/www/html/genomics/includes/connection.inc.php'; 
+$conn = dbConnect('josh','cgs-1953-asri');
+if (isset($_POST['search_column']) && isset($_POST['search_box'])){
+  $column = $_POST['search_column'];
+  $search_term = $_POST['search_box'];
+    $sql = "SELECT * FROM HSLog where $column=$search_term";    
+  }
+elseif (!isset($_GET['col']) && !isset($_GET['sort'])){
+    $sql = "SELECT * FROM HSLog";
+  }
+elseif (isset($_GET['col']) && !isset($_GET['sort'])){
+    $sql = "SELECT * FROM HSLog ORDER BY ".$_GET['col'];
+}
+elseif (isset($_GET['col']) && isset($_GET['sort'])){
+  $sql = "SELECT * FROM HSLog ORDER BY ".$_GET['col']." ".$_GET['sort'];
+}
+$result = $conn->query($sql);
+if(!isset($result)){ 
+    die(mysqli_error()); 
+}
+$numRows = $result->num_rows;
+$count_to_100 = 0;
+?>
+<html>
+  
+  <div id="records">
+    <head>
+      <title>HS Records</title>
+      <link rel="stylesheet" href="/css/genomics.css"></link>
+      <link rel="stylesheet" href="/css/hs_records_dropdown.css">
+    </head>
+
+    <spacer>
+      <h2>HS Records</h2>
+      <?php include('/var/www/html/genomics/includes/logout.inc.php'); ?>
+
+      <hr>
+    </spacer>
+    <body>
+      <table border='1' frame='box' id='records'>
+	<?php
+	  $count = 1;
+	  //Get the row data from the query
+	  while($row = $result->fetch_assoc()){
+	    echo '<tr>';
+	    if ($count==1){
+	      //Loop through all items in the row, create a new table entry in html for each one
+	      foreach($row as $item => $value){
+		//This checks if its a column from HSLog I want to display, if not it ignores it
+		if (!is_in_hs_records($item)){
+		  continue;
+		}
+		echo '
+		<th>
+		    <ul class="colDropdown">
+		        <li><a href="">'.htmlentities($item, ENT_COMPAT, 'UTF-8').'</a>
+		            <ul>
+		                <li><a href="hs_records.php?col='.$item.'">Ascending</a></li>
+		                <li><a href="hs_records.php?col='.$item.'&sort=DESC">Descending</a></li>
+		                <li><a href="">Search</a></li>
+		            </ul>
+		        </li>
+		    </ul>
+		</th>
+		';
+	      }
+	      $count++;
+	      echo '</tr><tr>';
+	    }
+	    //Increment the number of rows you want currently displayed
+	    if ($count_to_100 > 100){break;}
+	    $count_to_100++;
+
+	    foreach($row as $item => $value){
+	      //This checks if its a column I want to display, if not it ignores it
+	      if (!is_in_hs_records($item)){
+		continue;
+	      }
+	      //Create links for HS_form
+	      if ($item == 'HS_num'){
+		$displayed_name = htmlentities($value, ENT_COMPAT, 'ISO-8859-15');
+		echo '
+		<td>'.createLink('../read_record/HSLog',$value,$displayed_name).'</td>
+		';
+	      }
+	      //Create links for Subject
+	      elseif ($item == 'Subj_num'){
+		$displayed_name = htmlentities($value, ENT_COMPAT, 'ISO-8859-15');
+		echo '
+		<td>'.createLink('../read_record/Subject',$value,$displayed_name).'</td>
+		';
+	      }
+	      //Create links for CollabCode
+	      elseif ($item == 'CollabCode'){
+		$displayed_name = htmlentities($value, ENT_COMPAT, 'ISO-8859-15');
+		echo '
+		<td>'.createLink('../read_record/Collaborator',$value,$displayed_name).'</td>
+		';
+	      }
+	      else{
+		echo '
+		<td>'.htmlentities($value, ENT_COMPAT, 'ISO-8859-15').'</td>
+		';
+	      }
+	    }
+	    echo'</tr>';
+	  }
+	?>
+      </table>
+    </body>
+</html>

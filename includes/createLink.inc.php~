@@ -1,0 +1,5 @@
+<?php
+function createLink($table = 'HS_Log', $record = '32691'){
+  return '10.255.6.123/'.$table.'.php?record='.$record;
+
+  }

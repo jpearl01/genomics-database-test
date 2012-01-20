@@ -1,0 +1,8 @@
+CREATE TABLE users
+(
+    user_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    username VARCHAR(15) NOT NULL UNIQUE,
+    salt INT UNGISGNED NOT NULL,
+    pwd CHAR(40) NOT NULL,
+    PRIMARY KEY ( user_id )
+)

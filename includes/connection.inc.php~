@@ -1,0 +1,37 @@
+<?php
+function dbConnect($usertype, $connectionType = 'mysqli'){
+  $host = 'localhost';
+  $db = 'genomics_test';
+  if ($usertype == 'read'){
+    $user = 'psread';
+    $pwd = 'pass';
+  }
+  elseif ($usertype == 'write'){
+    $user = 'josh';
+    $pwd = 'cgs-1953-asri';
+  }
+  else {
+    exit('unrecognized connection type');
+  }
+  //Connect as the correct user.  This ill need to change according to who is loggin in
+  if ($connectionType == 'mysqli'){
+    $conn = new mysqli($host, $user, $pwd, $db);
+    if($conn->connect_error){
+      die('Cannot open the database');
+    }
+    return $conn;
+  }
+  else {
+    return "The connection is effed";
+  }
+  /*  else {
+    try{
+      return new PDO("mysql:host=$host;dbname=$db", $user, $pwd);
+    }
+    catch(PDOException $e){
+      echo 'Cannot connect to database';
+      exit;
+    }
+  }
+  */
+}

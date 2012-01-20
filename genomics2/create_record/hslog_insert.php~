@@ -1,0 +1,29 @@
+<!--
+    # Title: hslog_insert.php<BR>
+    # Author: Matthew Schultz<BR>
+    # Date: January 2012 <BR>
+    # Descripition: HSLog insert table helper for genomics database<BR>
+-->
+
+<?php
+include '/var/www/html/genomics/includes/createLink.inc.php';
+require_once '/var/www/html/genomics/includes/connection.inc.php'; 
+$conn = dbConnect('josh', 'cgs-1953-asri');
+if (!$conn)
+  {
+   die('Could not connect: ' . mysql_error());
+  }
+
+$sql="INSERT INTO Collaborator (HS_num, Species, TissueType, RecdDate, NA_num, File_num, TissueRef, SNP, StudyCode, Stu_num, CollectDate, BSNum, CollectBy, Subj_num, PTCode, Prefix, First, Middle, Last, Suffix, Sex, DOB, SSN, CollabCode, CollabInstitution, Degree, Prefix, First, Middle, Last, Suffix, InstCode, InstName, InstCity, InstState, InstCountry, InstPhone, InstZipCode, Freezer, Rack, Box, Slot, KbdDate, UpdateDate, InKbd, UpdateUser, Comments)
+
+VALUES ('$_POST[HS_num]','$_POST[Species]','$_POST[TissueType]', '$_POST[RecdDate]' , $_POST[NA_num], '$_POST[File_num]' , '$_POST[TissueRef]', '$_POST[SNP]', '$_POST[StudyCode]', '$_POST[Stu_num]', '$_POST[CollectDate]', '$_POST[BSNum]', '$_POST[CollectBy]', '$_POST[Subj_num]', '$_POST[PTCode]', '$_POST[Prefix]', '$_POST[First]', '$_POST[Middle]', '$_POST[Last]', '$_POST[Suffix]', '$_POST[Sex]', '$_POST[DOB]', '$_POST[SSN]', '$_POST[CollabCode]', '$_POST[CollabInstitution]', '$_POST[Degree]', '$_POST[Prefix]', '$_POST[First]' , '$_POST[Middle]', '$_POST[Last]', '$_POST[Suffix]', '$_POST[InstCode]', '$_POST[InstName]', '$_POST[InstCity]', '$_POST[InstState]', '$_POST[InstCountry]', '$_POST[InstPhone]', '$_POST[InstZipCode]', '$_POST[Freezer]', '$_POST[Rack]', '$_POST[Slot]', '$_POST[KbdDate]', '$_POST[UpdateDate]', '$_POST[InKbd]', '$_POST[UpdateUser]', '$_POST[Comments]')";
+
+$result= $conn->query($sql);
+
+if (!isset($result))
+   {
+   die('Oopsie you got an error!' . mysql_error());
+   }
+echo "1 record added";
+
+?>

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<!--
+    # Title: Company<BR>
+    # Author: Matthew Schultz<BR>
+    # Date: November 2011 <BR>
+    # Descripition: Company base table for genomics database<BR>
+-->
+
+<?php
+include '/var/www/html/genomics/includes/createLink.inc.php';
+require_once '/var/www/html/genomics/includes/connection.inc.php'; 
+$conn = dbConnect('josh','cgs-1953-asri');
+
+if (!isset($_GET['record'])){
+    $sql = "SELECT * FROM Company WHERE Comp_num = '2'";
+}
+elseif (isset($_GET['record'])){
+    $sql = "SELECT * FROM Company WHERE Comp_num = ".$_GET['record'];
+}
+$result = $conn->query($sql);
+
+if(!isset($result)){ 
+    die(mysqli_error()); 
+}
+$numRows = $result->num_rows;
+$row = $result->fetch_assoc();
+?>
+
+<html>
+  <div id="main">
+    <head>
+      <title>Company</title><?php if($numRows!=1){echo "<p class='warning'><font color='red'> Too many rows returned, incorrect Comp_num?</font></p>";}?>
+      <link rel="stylesheet" href="/css/genomics.css">
+      </head>
+      <spacer><h2>COMPANY</h2>
+      <hr></spacer>
+      <?php include '/var/www/html/genomics/includes/genomics_menu.inc.php'; ?>
+      <div id="restofcontent">
+	<spacer><BR></spacer>
+  
+<table>
+    <tr> 
+      <td>
+	<LABEL for="Comp_num">Comp#: </LABEL>
+	<INPUT type="text" id="Comp_num" value="<?php echo $row['Comp_num'] ?>"><BR>
+      </td>
+    </tr>
+    <tr> 
+      <td colspan="2">
+	<LABEL for="CompName">Name:</LABEL>
+	<INPUT type="text" size ="60" id="CompName" value="<?php echo $row['CompName'] ?>"><BR>
+      </td>
+    </tr>
+    <tr> 
+      <td>
+	<LABEL for="CompPhone">Phone: </LABEL>
+	<INPUT type="text" size ="30" id="CompPhone" value="<?php echo $row['CompPhone'] ?>"><BR>
+      </td>
+    </tr>
+    <tr> 
+      <td>
+	<LABEL for="CompFax">CompFax: </LABEL>
+	<INPUT type="text" size ="30" id="CompFax" value="<?php echo $row['EMail'] ?>"><BR>
+      </td>
+    </tr>
+    <tr> 
+      <td>
+	<LABEL for="InKbd">InKbd: </LABEL>
+	<INPUT type="text" size ="20" id="Inkbd" value="<?php echo $row['InKbd'] ?>"><BR>
+      </td>
+    </tr>
+    <tr> 
+      <td>
+	<LABEL for="KbdDate">KbdDate: </LABEL>
+	<INPUT type="text" size ="20" id="KbdDate" value="<?php echo $row['KbdDate'] ?>"><BR>
+      </td>
+    </tr>
+    <tr>
+      <td>
+	<LABEL for="Comment">Comments: </LABEL>
+	<TEXTAREA NAME=Comments value="<?php echo $row['Comments'] ?>">
+	</TEXTAREA>
+      </td>
+    </tr>
+</table>  
+
+     </div>
+</html>
+		  
+<spacer> <?php include '/var/www/html/genomics/includes/genomics_footer.inc.php'; ?></spacer>

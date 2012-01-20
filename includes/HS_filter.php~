@@ -1,0 +1,12 @@
+<?php
+  //Essentially we need a function that returns true if the item passed to it
+  //is not among the columns Mary and I (josh) decided to remove from the traditional
+  //HS log view.
+$removed = array('TissRef','SubjPrefix','CoPrefix','CoSuffix','CoDegree','CoInstCode','InstCode','InstCity','InstState','InstCountry','Stu#','KdbDate','InKdb','File#','SNP','Freezer','Rack','Box','Slot','UpdateUser','UpdateDate','BSNum','InstZipCode');
+function is_in_hs_records($item){
+  if (in_array($item,$removed)){
+    return FALSE;
+  }
+  else{
+    return TRUE;
+  }

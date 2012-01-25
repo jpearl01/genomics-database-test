@@ -12,7 +12,7 @@ require_once '/var/www/html/genomics/includes/connection.inc.php';
 <html>
   <div id="main">
     <head>
-      <title>Education</title>
+      <title>Education TESTING GIT TRNASFER!!!</title>
       <link rel="stylesheet" href="/css/genomics.css">
       </head>
       <spacer><h2>EDUCATION</h2>

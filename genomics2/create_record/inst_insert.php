@@ -1,8 +1,8 @@
 <!--
-    # Title: Institution<BR>
+    # Title: inst_insert<BR>
     # Author: Matthew Schultz<BR>
     # Date: January 2012 <BR>
-    # Descripition: Institution for genomics database<BR>
+    # Descripition: Institution insert table helper for genomics database needed by Institution form to insert data into the database<BR>
 -->
 
 <?php
@@ -11,7 +11,7 @@ require_once '/var/www/html/genomics/includes/connection.inc.php';
 $conn = dbConnect('josh', 'cgs-1953-asri');
 if (!$conn)
   {
-   die('Could not connect: ' . mysql_error());
+    die('Could not connect: ' . mysql_error());
   }
 
 $sql="INSERT INTO Institution (InstCode, KbdDate, InstFull, InKbd, InstShort, UpdateDate, InstSort, UpdateUser, EMail,
@@ -25,9 +25,8 @@ VALUES ('$_POST[InstCode]', '$_POST[KbdDate]', '$_POST[InstFull]', '$_POST[InKbd
 $result= $conn->query($sql);
 
 if (!isset($result))
-   {
-   die('Oopsie you got an error!' . mysql_error());
-   }
+  {
+    die('Oopsie you got an error!' . mysql_error());
+  }
 echo "1 record added";
-
 ?>

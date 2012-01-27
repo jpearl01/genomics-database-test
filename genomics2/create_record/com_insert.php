@@ -2,7 +2,7 @@
     # Title: com_insert<BR>
     # Author: Matthew Schultz<BR>
     # Date: January 2012 <BR>
-    # Descripition:  com_insert Company_insert helper form for genomics database<BR>
+    # Descripition: Company insert table helper for genomics database needed by Company form to insert data into the database<BR>
 -->
 
 <?php

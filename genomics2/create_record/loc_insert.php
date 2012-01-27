@@ -2,7 +2,7 @@
     # Title: Location<BR>
     # Author: Matthew Schultz<BR>
     # Date: January 2012 <BR>
-    # Descripition: Location for genomics database<BR>
+    # Descripition: Location insert table helper for genomics database needed by Location form to insert data into the database<BR>
 -->
 
 <?php

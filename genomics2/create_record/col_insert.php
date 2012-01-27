@@ -2,7 +2,7 @@
     # Title: col_insert.php<BR>
     # Author: Matthew Schultz<BR>
     # Date: January 2012 <BR>
-    # Descripition: Collaborator insert table helper for genomics database<BR>
+    # Descripition: Collaborator insert table helper for genomics database needed by Collaborator form to insert data into the database<BR>
 -->
 
 <?php

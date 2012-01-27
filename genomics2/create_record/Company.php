@@ -21,9 +21,9 @@ require_once '/var/www/html/genomics/includes/connection.inc.php';
       <div id="restofcontent">
 	<spacer><BR></spacer>
 
+<!--below ties this form to the com_insert helper-->
 <form action="com_insert.php" method="post">
-
-    <table>
+  <table>
     <tr> 
       <td>
 	<LABEL for="Comp_num">Comp#: </LABEL>

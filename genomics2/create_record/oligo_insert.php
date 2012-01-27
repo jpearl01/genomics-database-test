@@ -2,7 +2,7 @@
     # Title: Oligo Plate Location<BR>
     # Author: Matthew Schultz<BR>
     # Date: January 2012 <BR>
-    # Descripition: Oligo Plate Location for genomics database<BR>
+    # Descripition: Oligo Plate Location insert table helper for genomics database needed by Oligo Plate Location form to insert data into the database<BR>
 -->
 
 <?php

@@ -1,8 +1,8 @@
 <!--
-    # Title: Education<BR>
+    # Title: edu_insert<BR>
     # Author: Matthew Schultz<BR>
     # Date: January 2012 <BR>
-    # Descripition: Education base table for genomics database<BR>
+    # Descripition: Education insert table helper for genomics database needed by Education form to insert data into the database<BR>
 -->
 
 <?php

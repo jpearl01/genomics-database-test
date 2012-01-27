@@ -7,12 +7,12 @@ require_once '/var/www/html/genomics/includes/connection.inc.php';
     # Title: Education<BR>
     # Author: Matthew Schultz<BR>
     # Date: November 2011 <BR>
-    # Descripition: Education base table for genomics database<BR>
+    # Descripition: Education input form for genomics database<BR>
 -->
 <html>
   <div id="main">
     <head>
-      <title>Education TESTING GIT TRNASFER!!!</title>
+      <title>Education</title>
       <link rel="stylesheet" href="/css/genomics.css">
       </head>
       <spacer><h2>EDUCATION</h2>
@@ -21,8 +21,9 @@ require_once '/var/www/html/genomics/includes/connection.inc.php';
       <div id="restofcontent">
 	<spacer><BR></spacer>
 
+<!--below ties this form to the edu_insert helper-->
 <form action="edu_insert.php" method="post">
-<table>
+  <table>
     <tr> 
       <td>
 	<LABEL for="EduCode">EduCode: </LABEL>
@@ -43,13 +44,12 @@ require_once '/var/www/html/genomics/includes/connection.inc.php';
     </tr>
     <tr>
       <td>
-      <LABEL for="">.</LABEL>
-      <input type="submit"><BR>
+	<LABEL for="">.</LABEL>
+	<input type="submit"><BR>
       </td>
     </tr>
-</table>  
-
-     </div>
+  </table>  
+      </div>
 </html>
 		  
 <spacer> <?php include '/var/www/html/genomics/includes/genomics_footer.inc.php'; ?></spacer>
